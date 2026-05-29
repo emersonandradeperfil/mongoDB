@@ -1,0 +1,47 @@
+CREATE
+from conexao import db
+produtos = db["tabela_de_produtos"]
+novos_produtos = [
+    {
+        "CODIGO_DO_PRODUTO": 999901,
+        "NOME_DO_PRODUTO": "Suco Teste 1",
+        "SABOR": "Manga",
+        "PRECO_DE_LISTA": 8.50
+    },
+    {
+        "CODIGO_DO_PRODUTO": 999902,
+        "NOME_DO_PRODUTO": "Suco Teste 2",
+        "SABOR": "Uva",
+        "PRECO_DE_LISTA": 9.50
+    }
+]
+resultado = produtos.insert_many(novos_produtos)
+print("IDs inseridos:", resultado.inserted_ids)
+--------------------------------------------------------------------------------
+READ
+from conexao import db
+produtos = db["tabela_de_produtos"]
+resultado = produtos.find({
+    "PRECO_DE_LISTA": {"$gte": 8}
+})
+for item in resultado:
+    print(item)
+--------------------------------------------------------------------------------
+UPDATE
+from conexao import db
+produtos = db["tabela_de_produtos"]
+resultado = produtos.update_many(
+    {"SABOR": "Manga"},
+    {"$set": {"CLASSIFICACAO": "Produto de Manga"}}
+)
+print("Encontrados:", resultado.matched_count)
+print("Modificados:", resultado.modified_count)
+---------------------------------------------------------------------------------
+DELETE
+from conexao import db
+produtos = db["tabela_de_produtos"]
+resultado = produtos.delete_many({
+    "CODIGO_DO_PRODUTO": {"$gte": 999900}
+})
+print("Excluídos:", resultado.deleted_count)
+----------------------------------------------------------------------------------
