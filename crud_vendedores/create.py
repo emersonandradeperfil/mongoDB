@@ -1,13 +1,16 @@
-from crud_vendedores.conexao import db
+from conexao import db
 
-produtos = db['tabela_de_produtos']
+vendedores = db['tabela_de_vendedores']
 
-novo_produto = {
-    'CODIGO_DO_PRODUTO':99999,
-    'NOME_DO_PRODUTO':'Produto Teste',
-    'SABOR': 'Pera',
-    'PRECO_DE_LISTA': 8.50
+novo_vendedor = {
+    'MATRICULA':2387,
+    'NOME':'Emerson de Andrade',
+    'PERCENTUAL_COMISSAO':0.08,
+    'DATA_ADMISSAO': '2014-08-15T00:00:00.000+00:00',
+    'DE_FERIAS': 0,
+    'BAIRRO':"Penha"
 }
-produtos.insert_one(novo_produto)
+vendedores.insert_one(novo_vendedor)
 
 print('Produto inserido com sucesso')
+

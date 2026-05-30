@@ -1,4 +1,4 @@
-from crud_vendedores.conexao import db
+from conexao import db
 
 produtos = db['tabela_de_produtos']
 
